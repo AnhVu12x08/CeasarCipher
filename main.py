@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import string
 
+
 class CaesarCipher:
     def __init__(self):
         self.alphabet = list(string.ascii_lowercase)
@@ -35,6 +36,7 @@ class CaesarCipher:
             results.append(f'Key {k}: {decrypted_text}')
         return "\n".join(results)
 
+
 class GUI:
     def __init__(self, root):
         self.cipher = CaesarCipher()
@@ -63,10 +65,10 @@ class GUI:
         self.output_label = tk.Label(root, text="Output:")
         self.output_label.pack()
 
-        self.output_text = tk.Text(root, height=10, width=50)
+        self.output_text = tk.Text(root, height=20, width=80, state=tk.DISABLED)
         self.output_text.pack()
 
-        self.process_button = tk.Button(root, text="Process", command=self.process)
+        self.process_button = tk.Button(root, text="Process", command=self.process, fg="red")
         self.process_button.pack()
 
     def process(self):
@@ -92,13 +94,8 @@ class GUI:
         self.output_text.delete(1.0, tk.END)
         self.output_text.insert(tk.END, result)
 
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = GUI(root)
     root.mainloop()
-
-
-
-
-
-
