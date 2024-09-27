@@ -5,15 +5,19 @@ import string
 
 class CaesarCipher:
     def __init__(self):
-        self.alphabet = list(string.ascii_lowercase)
+        self.lowercase_alphabet = list(string.ascii_lowercase)
+        self.uppercase_alphabet = list(string.ascii_uppercase)
 
     def encrypt(self, plaintext, k):
         ciphertext = ''
         k = k % 26
         for letter in plaintext:
-            if letter in self.alphabet:
-                index = (self.alphabet.index(letter) + k) % 26
-                ciphertext += self.alphabet[index]
+            if letter in self.lowercase_alphabet:
+                index = (self.lowercase_alphabet.index(letter) + k) % 26
+                ciphertext += self.lowercase_alphabet[index]
+            elif letter in self.uppercase_alphabet:
+                index = (self.uppercase_alphabet.index(letter) + k) % 26
+                ciphertext += self.uppercase_alphabet[index]
             else:
                 ciphertext += letter
         return ciphertext
@@ -22,9 +26,12 @@ class CaesarCipher:
         plaintext = ''
         k = k % 26
         for letter in ciphertext:
-            if letter in self.alphabet:
-                index = (self.alphabet.index(letter) - k) % 26
-                plaintext += self.alphabet[index]
+            if letter in self.lowercase_alphabet:
+                index = (self.lowercase_alphabet.index(letter) - k) % 26
+                plaintext += self.lowercase_alphabet[index]
+            elif letter in self.uppercase_alphabet:
+                index = (self.uppercase_alphabet.index(letter) - k) % 26
+                plaintext += self.uppercase_alphabet[index]
             else:
                 plaintext += letter
         return plaintext
@@ -72,7 +79,7 @@ class GUI:
         self.process_button.pack()
 
     def process(self):
-        message = self.message_entry.get().lower()
+        message = self.message_entry.get()
         mode = self.mode_var.get()
 
         if mode in ['encrypt', 'decrypt']:
@@ -91,8 +98,10 @@ class GUI:
         else:
             result = "Invalid mode selected."
 
+        self.output_text.config(state=tk.NORMAL)
         self.output_text.delete(1.0, tk.END)
         self.output_text.insert(tk.END, result)
+        self.output_text.config(state=tk.DISABLED)
 
 
 if __name__ == "__main__":
