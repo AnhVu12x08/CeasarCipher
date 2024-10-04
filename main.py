@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 import string
+import tkinter.messagebox as mb
 
+a = string.ascii_letters
 
 class CaesarCipher:
     def __init__(self):
@@ -46,7 +48,7 @@ class CaesarCipher:
 
 class GUI:
     def __init__(self, root):
-        self.cipher = CaesarCipher()
+        self.cipher =  CaesarCipher()
 
         root.title("Caesar Cipher")
 
